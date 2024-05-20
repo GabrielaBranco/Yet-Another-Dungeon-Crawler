@@ -1,0 +1,16 @@
+room1:
+    description: You find yourself in a really dark room
+    north: room2
+    south: -
+    west: room3
+    east: room4
+    item: +HP 20
+    enemy: -
+room2:
+    description: This place stinks
+    north: room5
+    south: room1
+    west: room6
+    east: -
+    item: -
+    enemy: dragon 150 75
