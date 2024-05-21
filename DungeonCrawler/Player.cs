@@ -1,35 +1,52 @@
-using System;
+using System.Collections.Generic;
 
 namespace DungeonCrawler
 {
-    class Player : ICharacter
+    public class Player : ICharacter
     {
-        public int Health { get; private set; }
+        public string Name { get; private set; }
+        public int Health { get; set; }
         public int AttackPower { get; private set; }
+        public int Defense { get; private set; }
+        public Inventory Inventory { get; private set; }
 
-        public Player(int health, int attackPower)
+        public Player(string name, int health, int attackPower)
         {
+            Name = name;
             Health = health;
             AttackPower = attackPower;
+            Defense = 0;
+            Inventory = new Inventory();
         }
 
-        public void Move()
+        public Room Move(DungeonMap map, string roomName)
         {
-
+            return map.GetRoom(roomName);
         }
 
-        public void PickUpItem()
+        public void PickUpItem(Item item)
         {
-            
+            Inventory.AddItem(item);
         }
-        public void Attack(int attackPower)
+
+        public void Attack(ICharacter enemy, int attackPower)
         {
-            Health -= attackPower;
+            enemy.Health -= attackPower;
         }
 
         public void Heal(int value)
         {
             Health += value;
+        }
+
+        public void EquipWeapon(int value)
+        {
+            AttackPower += value;
+        }
+
+        public void EquipGear(int value)
+        {
+            Defense += value;
         }
 
     }

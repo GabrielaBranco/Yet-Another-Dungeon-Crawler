@@ -1,23 +1,22 @@
-using System;
-
 namespace DungeonCrawler
 {
-    class Enemy : ICharacter
+    public class Enemy : ICharacter
     {
-        public readonly string Name;
-        public int Health { get; private set; }
+        public string Name { get; private set; }
+        public int Health { get; set; }
         public int AttackPower { get; private set; }
+        public int Defense { get; private set; }
 
-        public Enemy(string name, int health, int attackPower)
+        public Enemy(string name, int health, int attackPower, int defense)
         {
             Name = name;
             Health = health;
             AttackPower = attackPower;
+            Defense = defense;
         }
-        public void Attack(int attackPower)
+        public void Attack(ICharacter player, int attackPower)
         {
-            Console.WriteLine("Attack");
+            player.Health -= (AttackPower - player.Defense);
         }
-
     }
 }

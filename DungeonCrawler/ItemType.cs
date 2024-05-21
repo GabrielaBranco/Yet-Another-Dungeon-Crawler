@@ -4,7 +4,6 @@ namespace DungeonCrawler
     {
         Weapon,
         Gear,
-        Potion,
-        Misc
+        Potion
     }
 }

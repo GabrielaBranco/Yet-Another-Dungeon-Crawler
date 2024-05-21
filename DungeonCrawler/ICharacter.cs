@@ -1,11 +1,11 @@
-using System;
-
 namespace DungeonCrawler
 {
     public interface ICharacter
     {
-        int Health { get; }
+        string Name { get; }
+        int Health { get; set; }
         int AttackPower { get; }
-        void Attack( int attackPower );
+        int Defense { get; }
+        void Attack( ICharacter creature, int attackPower );
     }
 }
