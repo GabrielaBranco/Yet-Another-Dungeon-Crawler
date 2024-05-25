@@ -9,11 +9,13 @@ namespace DungeonCrawler
         public int AttackPower { get; private set; }
         public int Defense { get; private set; }
         public Inventory Inventory { get; private set; }
+        private int maxHealth;
 
-        public Player(string name, int health, int attackPower)
+        public Player(string name,int attackPower)
         {
+            maxHealth = 100;
             Name = name;
-            Health = health;
+            Health = maxHealth;
             AttackPower = attackPower;
             Defense = 0;
             Inventory = new Inventory();
@@ -31,12 +33,16 @@ namespace DungeonCrawler
 
         public void Attack(ICharacter enemy, int attackPower)
         {
-            enemy.Health -= attackPower;
+            enemy.Health -= attackPower - enemy.Defense;
         }
 
         public void Heal(int value)
         {
             Health += value;
+            if (Health > maxHealth)
+            {
+                Health = maxHealth;
+            }
         }
 
         public void EquipWeapon(int value)

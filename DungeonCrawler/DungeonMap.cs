@@ -6,7 +6,7 @@ namespace DungeonCrawler
 {
     public class DungeonMap
     {
-        public Dictionary<string, Room> Rooms { get; private set; } = new Dictionary<string, Room>();
+        public Dictionary<string, Room> Rooms = new Dictionary<string, Room>();
 
         public void LoadRooms(string filePath)
         {

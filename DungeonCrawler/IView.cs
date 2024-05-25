@@ -4,14 +4,18 @@ namespace DungeonCrawler
 {
     public interface IView
     {
+        //Menus
         int MainMenu();
         void AfterMenu();
 
+        //Start & Ending messages
         void Welcome();
         void EndMessage();
         void InvalidOption();
         void GameOver();
-
+        void GameWon();
+        
+        //Items
         void ItemFoundMessage(Item item);
         string ItemInformation(Item item);
         public bool AskPickUpItem();
@@ -21,13 +25,17 @@ namespace DungeonCrawler
         void ItemUsed(Item item);
         void ItemEquipped(Item item);
 
-        void CombatMessage(ICharacter enemy);
+        //Combat
+        void FaceEnemy();
+        void CombatMenu(ICharacter enemy);
         void EnemyDefeated(ICharacter enemy);
         int GetAction();
         void ShowInventory(List<Item> items);
         void Flee();
-        void ReceiveDamage(ICharacter creature, int damage);
+        void ReceiveDamage(ICharacter entity, int damage);
+        void DamageBlocked(ICharacter entity);
 
+        //Rooms and Map
         void RoomDescription(Room room);
         void EmptyMessage();
     }
