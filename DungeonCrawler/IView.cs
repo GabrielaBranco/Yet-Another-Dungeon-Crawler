@@ -7,12 +7,14 @@ namespace DungeonCrawler
         //Menus
         int MainMenu();
         void AfterMenu();
+
         //Start & Ending messages
         void Welcome();
         void EndMessage();
         void InvalidOption();
         void GameOver();
         void GameWon();
+        
         //Items
         void ItemFoundMessage(Item item);
         string ItemInformation(Item item);
@@ -22,6 +24,7 @@ namespace DungeonCrawler
         bool AskUseItem(Item item);
         void ItemUsed(Item item);
         void ItemEquipped(Item item);
+
         //Combat
         void FaceEnemy();
         void CombatMenu(ICharacter enemy);
@@ -31,6 +34,7 @@ namespace DungeonCrawler
         void Flee();
         void ReceiveDamage(ICharacter entity, int damage);
         void DamageBlocked(ICharacter entity);
+
         //Rooms and Map
         void RoomDescription(Room room);
         void EmptyMessage();

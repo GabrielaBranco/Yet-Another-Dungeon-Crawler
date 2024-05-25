@@ -7,7 +7,7 @@
             DungeonMap map= new DungeonMap();
             map.LoadRooms("Rooms.txt");
 
-            Player player = new Player("Alan", 100, 10);
+            Player player = new Player("Alan", 10);
 
             IView view= new View();
             Controller controller= new Controller(map, view, player);

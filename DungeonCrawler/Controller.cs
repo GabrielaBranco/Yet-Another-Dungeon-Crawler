@@ -7,6 +7,7 @@ namespace DungeonCrawler
         private DungeonMap dungeon;
         private IView view;
         private Room currentRoom;
+        private Room previousRoom;
         private Player player;
         private bool gameOver = false;
 
@@ -16,7 +17,9 @@ namespace DungeonCrawler
             this.view = view;
             this.player = player;
             this.currentRoom = dungeon.GetRoom("room1");
+            this.previousRoom = null;
         }
+
         public void Start(IView view)
         {
             this.view = view;
@@ -29,7 +32,7 @@ namespace DungeonCrawler
                 HandleRoomEvents();
 
                 if (gameOver) break;
-                
+
                 option = view.MainMenu();
                 switch (option)
                 {
@@ -89,53 +92,67 @@ namespace DungeonCrawler
         private void StartCombat(ICharacter enemy)
         {
             view.FaceEnemy();
-            while (enemy.Health > 0 && player.Health > 0)
+            bool fled = false;
+            while (enemy.Health > 0 && player.Health > 0 && !fled)
             {
                 view.CombatMenu(enemy);
                 int action = view.GetAction();
-                int attkPower;
-                
+
                 if (action == 1)
                 {
-                    if (enemy.Health > 0 && player.Health > 0)
+                    HandlePlayerTurn(enemy);
+                    if (enemy.Health > 0)
                     {
-                        //Player's turn
-                        attkPower = player.AttackPower;
-                        if(enemy.Defense >= player.AttackPower)
-                        {
-                            attkPower = 0;
-                            view.DamageBlocked(enemy);
-                        }
-                        player.Attack(enemy, attkPower);
-                        view.ReceiveDamage(enemy, attkPower);
-
-                        //Enemy's turn
-                        attkPower = enemy.AttackPower;
-                        if(player.Defense >= enemy.AttackPower)
-                        {
-                            attkPower = 0;
-                            view.DamageBlocked(player);
-                        }
-                        enemy.Attack(player, attkPower);
-
-                        if (player.Health <= 0)
-                        {
-                            gameOver = true;
-                            view.GameOver();
-                            break;
-                        }
-                        view.ReceiveDamage(player, attkPower);
+                        HandleEnemyTurn(enemy);
                     }
                 }
                 else if (action == 2)
                 {
                     ManageInventory();
                 }
+                else if (action == 3)
+                {
+                    Flee();
+                    fled = true;
+                }
                 else
                 {
                     view.InvalidOption();
                 }
             }
+        }
+
+        private void HandlePlayerTurn(ICharacter enemy)
+        {
+            int attkPower = CalculateAttackPower(player.AttackPower, enemy.Defense);
+            if (attkPower == 0)
+            {
+                view.DamageBlocked(enemy);
+            }
+            player.Attack(enemy, attkPower);
+            view.ReceiveDamage(enemy, attkPower);
+        }
+
+        private void HandleEnemyTurn(ICharacter enemy)
+        {
+            int attkPower = CalculateAttackPower(enemy.AttackPower, player.Defense);
+            if (attkPower == 0)
+            {
+                view.DamageBlocked(player);
+            }
+            enemy.Attack(player, attkPower);
+
+            if (player.Health <= 0)
+            {
+                gameOver = true;
+                view.GameOver();
+            }
+            view.ReceiveDamage(player, attkPower);
+        }
+
+        private int CalculateAttackPower(int attackPower, int defense)
+        {
+            return defense >= attackPower ? 0 : attackPower;
         }
 
         private void ManageInventory()
@@ -145,7 +162,7 @@ namespace DungeonCrawler
             {
                 view.ShowInventory(player.Inventory.GetItems());
                 int inventoryOption = view.InventoryMenu();
-                
+
                 if (inventoryOption > 0 && inventoryOption <= player.Inventory.GetItems().Count)
                 {
                     Item selectedItem = player.Inventory.GetItems()[inventoryOption - 1];
@@ -159,10 +176,7 @@ namespace DungeonCrawler
                 {
                     inInventory = false;
                 }
-                else
-                {
-                    view.InvalidOption();
-                }
+                else view.InvalidOption();
             }
         }
 
@@ -185,11 +199,22 @@ namespace DungeonCrawler
             }
         }
 
+        private void Flee()
+        {
+            if (previousRoom != null)
+            {
+                currentRoom = previousRoom;
+                previousRoom = null;
+                view.Flee();
+            }
+        }
+
         private void MoveToRoom(string roomName)
         {
             if (roomName != "-")
             {
-                if(roomName == "END")
+                previousRoom = currentRoom;
+                if (roomName == "END")
                 {
                     view.GameWon();
                     gameOver = true;
@@ -199,10 +224,7 @@ namespace DungeonCrawler
                     currentRoom = player.Move(dungeon, roomName);
                 }
             }
-            else
-            {
-                view.EmptyMessage();
-            }
+            else view.EmptyMessage();
         }
     }
 }

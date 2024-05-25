@@ -1,53 +1,48 @@
 room1:
-    description: You find yourself in a really dark room.
-    item: Healing Potion/Heals +20HP/20/Potion/Restores
-    enemy: -
+    description: You are in a dark room with a single flickering torch.
     north: room2
     south: -
-    east: room4
     west: room3
-
+    east: room4
+    item: Healing Potion/Heals +20HP/20/Potion/You heal
+    enemy: -
 room2:
-    description: This place stinks.
-    item: -
-    enemy: Dragon/50/15/10
+    description: You have entered a cold and damp cave.
     north: room5
     south: room1
-    east: -
     west: room6
-
-room3:
-    description: You enter a room filled with cobwebs.
-    item: Dagger/+5 Attack Power/5/Weapon/Increases attack
-    enemy: Spider/50/10/5
-    north: -
-    south: -
-    east: room1
-    west: -
-
-room4:
-    description: The room is brightly lit, almost blinding.
-    item: Major Life Potion/Increases your life permanently/50/Potion/Permanent
-    enemy: Goblin/50/10/5
-    north: -
-    south: -
     east: -
+    item: Major Life Potion/Heals all of your HP/100/Potion/You heal
+    enemy: Dragon/150/75/0
+room3:
+    description: This room is filled with ancient artifacts.
+    north: -
+    south: -
+    west: -
+    east: room1
+    item: Dagger/+5 Attack Power/5/Weapon/Your attack power increases
+    enemy: -
+room4:
+    description: The room is empty but the walls are covered in strange runes.
+    north: -
+    south: -
     west: room1
-
+    east: -
+    item: -
+    enemy: Goblin/50/10/5
 room5:
-    description: You have entered a grand hall with tall ceilings.
-    item: Shield/+10 Defense/10/Gear/Increases defense
-    enemy: Ogre/50/20/15
+    description: A mysterious light emanates from the ceiling.
     north: -
     south: room2
-    east: -
     west: -
-
+    east: -
+    item: -
+    enemy: -
 room6:
-    description: This is a small, cluttered storeroom with shelves full of old supplies.
-    item: Healing Potion/Heals +20HP/20/Potion/Restores
-    enemy: Skeleton/50/15/10
+    description: A narrow passage with an eerie silence.
     north: -
     south: -
-    east: room2
     west: -
+    east: room2
+    item: -
+    enemy: Orc/100/20/20
