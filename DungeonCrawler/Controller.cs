@@ -204,7 +204,7 @@ namespace DungeonCrawler
             if (previousRoom != null)
             {
                 currentRoom = previousRoom;
-                previousRoom = null; // Reset the previous room after fleeing
+                previousRoom = null;
                 view.Flee();
             }
         }

@@ -12,15 +12,15 @@ room2:
     south: room1
     west: room6
     east: -
-    item: Major Life Potion/Heals all your health/100/Potion/You heal
-    enemy: Dragon/150/50/0
+    item: Major Life Potion/Heals all of your HP/100/Potion/You heal
+    enemy: Dragon/150/75/0
 room3:
     description: This room is filled with ancient artifacts.
     north: -
     south: -
     west: -
     east: room1
-    item: Dragon Dagger/+50 Attack Power/50/Weapon/Your attack power increases
+    item: Dagger/+5 Attack Power/5/Weapon/Your attack power increases
     enemy: -
 room4:
     description: The room is empty but the walls are covered in strange runes.
@@ -40,9 +40,9 @@ room5:
     enemy: -
 room6:
     description: A narrow passage with an eerie silence.
-    north: room2
+    north: -
     south: -
     west: -
-    east: END
+    east: room2
     item: -
     enemy: Orc/100/20/20
