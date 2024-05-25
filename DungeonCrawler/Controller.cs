@@ -29,8 +29,8 @@ namespace DungeonCrawler
                 HandleRoomEvents();
 
                 if (gameOver) break;
+                
                 option = view.MainMenu();
-
                 switch (option)
                 {
                     case 1:
@@ -47,6 +47,7 @@ namespace DungeonCrawler
                         break;
                     case 0:
                         view.EndMessage();
+                        gameOver = true;
                         break;
                     default:
                         view.InvalidOption();
@@ -87,36 +88,48 @@ namespace DungeonCrawler
 
         private void StartCombat(ICharacter enemy)
         {
+            view.FaceEnemy();
             while (enemy.Health > 0 && player.Health > 0)
             {
-                view.CombatMessage(enemy);
+                view.CombatMenu(enemy);
                 int action = view.GetAction();
+                int attkPower;
                 
                 if (action == 1)
                 {
-                    player.Attack(enemy, player.AttackPower);
-                    view.ReceiveDamage(enemy, player.AttackPower);
-
                     if (enemy.Health > 0 && player.Health > 0)
                     {
-                        enemy.Attack(player, enemy.AttackPower);
-                        view.ReceiveDamage(player, enemy.AttackPower);
+                        //Player's turn
+                        attkPower = player.AttackPower;
+                        if(enemy.Defense >= player.AttackPower)
+                        {
+                            attkPower = 0;
+                            view.DamageBlocked(enemy);
+                        }
+                        player.Attack(enemy, attkPower);
+                        view.ReceiveDamage(enemy, attkPower);
+
+                        //Enemy's turn
+                        attkPower = enemy.AttackPower;
+                        if(player.Defense >= enemy.AttackPower)
+                        {
+                            attkPower = 0;
+                            view.DamageBlocked(player);
+                        }
+                        enemy.Attack(player, attkPower);
+
                         if (player.Health <= 0)
                         {
                             gameOver = true;
                             view.GameOver();
                             break;
                         }
+                        view.ReceiveDamage(player, attkPower);
                     }
                 }
                 else if (action == 2)
                 {
                     ManageInventory();
-                }
-                else if (action == 3)
-                {
-                    view.Flee();
-                    break;
                 }
                 else
                 {
@@ -176,7 +189,15 @@ namespace DungeonCrawler
         {
             if (roomName != "-")
             {
-                currentRoom = player.Move(dungeon, roomName);
+                if(roomName == "END")
+                {
+                    view.GameWon();
+                    gameOver = true;
+                }
+                else
+                {
+                    currentRoom = player.Move(dungeon, roomName);
+                }
             }
             else
             {

@@ -1,16 +1,53 @@
 room1:
-    description: You find yourself in a really dark room
+    description: You find yourself in a really dark room.
+    item: Healing Potion/Heals +20HP/20/Potion/Restores
+    enemy: -
     north: room2
     south: -
-    west: room3
     east: room4
-    item: +HP 20
-    enemy: -
+    west: room3
+
 room2:
-    description: This place stinks
+    description: This place stinks.
+    item: -
+    enemy: Dragon/50/15/10
     north: room5
     south: room1
-    west: room6
     east: -
-    item: -
-    enemy: dragon 150 75
+    west: room6
+
+room3:
+    description: You enter a room filled with cobwebs.
+    item: Dagger/+5 Attack Power/5/Weapon/Increases attack
+    enemy: Spider/50/10/5
+    north: -
+    south: -
+    east: room1
+    west: -
+
+room4:
+    description: The room is brightly lit, almost blinding.
+    item: Major Life Potion/Increases your life permanently/50/Potion/Permanent
+    enemy: Goblin/50/10/5
+    north: -
+    south: -
+    east: -
+    west: room1
+
+room5:
+    description: You have entered a grand hall with tall ceilings.
+    item: Shield/+10 Defense/10/Gear/Increases defense
+    enemy: Ogre/50/20/15
+    north: -
+    south: room2
+    east: -
+    west: -
+
+room6:
+    description: This is a small, cluttered storeroom with shelves full of old supplies.
+    item: Healing Potion/Heals +20HP/20/Potion/Restores
+    enemy: Skeleton/50/15/10
+    north: -
+    south: -
+    east: room2
+    west: -

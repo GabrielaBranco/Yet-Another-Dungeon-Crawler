@@ -67,7 +67,8 @@ namespace DungeonCrawler
 
         public void EndMessage()
         {
-            Console.WriteLine("Bye!");
+            Console.WriteLine("\n");
+            Console.WriteLine("Bye, you coward!");
         }
 
         public void InvalidOption()
@@ -100,7 +101,10 @@ namespace DungeonCrawler
             "              ░ ░   ░ ░ ░ ▒  ░  ░  ░     ░     ░░   ░     ░ " + "\n" +
             "                ░  ░    ░ ░        ░     ░  ░   ░      ░    " + "\n");
         }
-
+        public void GameWon()
+        {
+            Console.WriteLine("You won!");
+        }
 
         //Items
         public void ItemFoundMessage(Item item)
@@ -152,15 +156,18 @@ namespace DungeonCrawler
         }
 
         //Enemy and Combat
-        public void CombatMessage(ICharacter enemy)
+        public void FaceEnemy()
         {
             Console.WriteLine($"You face an enemy in your way");
+        }
+        public void CombatMenu(ICharacter enemy)
+        {
             Console.WriteLine($"{enemy.Name} has {enemy.Health} HP.\n");
             Console.WriteLine("What will you do?");
             Console.WriteLine("----\n");
             Console.WriteLine("1. Attack");
             Console.WriteLine("2. Inventory");
-            Console.WriteLine("3. Flee");
+            Console.WriteLine("\n");
             Console.Write("Your choice > ");
         }
 
@@ -188,14 +195,19 @@ namespace DungeonCrawler
 
         public void Flee()
         {
-            Console.WriteLine("You fled from the battle!");
+            Console.WriteLine("You fled from the battle and ran back through the way you came!");
         }
 
-        public void ReceiveDamage(ICharacter creature, int damage)
+        public void ReceiveDamage(ICharacter entity, int damage)
         {
-            Console.WriteLine($"{creature.Name} receives {damage} damage! Health now: {creature.Health}\n");
+            Console.WriteLine($"{entity.Name} receives {damage} damage!");
+            Console.WriteLine($"{entity.Name}'s health now is: {entity.Health}\n");
         }
 
+        public void DamageBlocked(ICharacter entity)
+        {
+            Console.WriteLine($"{entity.Name} blocked all damage!");
+        }
 
         //Map and Rooms
         public void RoomDescription(Room room)

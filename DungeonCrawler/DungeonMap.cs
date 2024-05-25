@@ -10,6 +10,8 @@ namespace DungeonCrawler
 
         public void LoadRooms(string filePath)
         {
+            //Opens a text file, reads all lines of the file, and then closes the file.
+            //Returns:A string array containing all lines of the file.
             string[] lines = File.ReadAllLines(filePath);
             Room currentRoom = null;
 
