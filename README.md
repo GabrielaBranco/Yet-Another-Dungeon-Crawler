@@ -1,4 +1,4 @@
-# Yet Another Dungeon Crawler
+        # Yet Another Dungeon Crawler
 
 ## Autoria
 
@@ -39,42 +39,38 @@ Classes:
 
 
 ### Diagrama UML de Classes
+
 ```mermaid
 classDiagram
-    class Player {
-        -int Health
-        -int AttackPower
-        +Move()
-        +Attack()
-        +PickUpItem()
-        +Heal()
-    }
+    class IView
+    <<interface>> IView
 
-    class Enemy {
-        -int Health
-        -int AttackPower
-        +Attack()
-    }
+    class ICharacter
+    <<interface>> ICharacter
 
-    class Item {
-        <<abstract>>
-    }
+    class ItemType
+    <<enumeration>> ItemType
 
-    class HealthPotion {
-        +int RestoreAmount
-        +Use(player: Player)
-    }
 
-    class Room {
-        -Enemy enemy
-        -Item item
-        +LinkTo(room: Room)
-    }
+    Player --|> Inventory
+    Player ..|> ICharacter
+    Enemy ..|> ICharacter
 
-    Player --> Room
-    Room --> Enemy
-    Room --> Item
-    Item <|-- HealthPotion
+    
+    View ..|> IView
+
+    Inventory --|> Item
+    Item ..|> ItemType
+    DungeonMap --|> Room
+
+    Controller --|> Player
+    Controller --|> DungeonMap
+    Controller ..|> IView
+
+    Program --> Controller
+    Program --> DungeonMap
+    Program --> IView
+    Program --> PLayer
 ```
 
 ## Referências
