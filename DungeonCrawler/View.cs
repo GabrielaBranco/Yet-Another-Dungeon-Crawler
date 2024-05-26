@@ -54,7 +54,7 @@ namespace DungeonCrawler
             "░ ░ ▒  ░ ░ ░  ░   ░    ░ ░▒  ░ ░   ▒░▒   ░  ░ ░  ░  ░   ░  ▒ ░░ ░░   ░ ▒░ ░  ░ "+"\n"+
             "░ ░      ░    ░      ░  ░  ░      ░    ░    ░   ░ ░   ░  ▒ ░   ░   ░ ░     ░   "+"\n"+
             "    ░  ░   ░  ░              ░      ░         ░  ░      ░  ░           ░  ░    "+"\n"+
-            "                                       ░                                       "+"\n\n");
+            "                                       ░                                       "+"\n\n\n\n");
             Console.ForegroundColor = ConsoleColor.White;
         }
 
