@@ -1,48 +1,64 @@
 room1:
-    description: You are in a dark room with a single flickering torch.
+    description:  You wake up in a dark room with flickering torches on both sides in a single line leading the path ahead of you.
     north: room2
     south: -
-    west: room3
-    east: room4
-    item: Healing Potion/Heals +20HP/20/Potion/You heal
+    west: -
+    east: -
+    item: -
     enemy: -
 room2:
-    description: You have entered a cold and damp cave.
-    north: room5
+    description: You have entered a cold and damp space. A menacing gargoyle awakens by the door, its stone eyes gleaming, guarding the door ahead
+    north: room3
     south: room1
-    west: room6
-    east: -
-    item: Major Life Potion/Heals all of your HP/100/Potion/You heal
-    enemy: Dragon/150/75/10
-room3:
-    description: This room is filled with ancient artifacts.
-    north: -
-    south: -
     west: -
-    east: room1
-    item: Dagger/+5 Attack Power/5/Weapon/Your attack power increases
+    east: -
+    item: Healing Potion/Perfect to mend smaller wounds./25/Potion/You heal
+    enemy: Gargoyle/15/10/0
+room3:
+    description: As you step into the chamber, the air is thick with the scent of various herbs and reagents, scattered haphazardly across a cluttered table. Parchments filled with arcane symbols and diagrams vie for space amidst the chaos. To the east, a door adorned with an enigmatic sigil beckons, promising secrets beyond. To the west, a staircase descends into the depths of the dungeon, shrouded in ominous darkness. And to the north, a peculiar aperture gapes in the wall, insinuating at hidden passage.
+    north: room8
+    south: room2
+    west: room6
+    east: room4
+    item: Major Healing Potion/Provides complete restoration./100/Potion/You heal
     enemy: -
 room4:
-    description: The room is empty but the walls are covered in strange runes.
+    description: You step into a vast hallway, devoid of life, yet the walls are adorned with cryptic runes and eerie portraits that follow your every move with their haunting gaze. Suddenly, a mischievous goblin materializes before you, its eyes gleaming with mischief and malice.
     north: -
     south: -
-    west: room1
-    east: -
+    west: room3
+    east: room5
     item: -
-    enemy: Goblin/50/10/5
+    enemy: Goblin/30/10/0
 room5:
-    description: A mysterious light emanates from the ceiling.
+    description: Within the chamber, ancient artifacts abound, each whispering tales of ages long past. Amidst the relics, a sword resonates with you, its hilt pulsating with an otherworldly energy that beckons to your soul.
     north: -
-    south: room2
-    west: -
+    south: -
+    west: room4
     east: -
-    item: -
+    item: Wrymblade/It thrums, sensing kinship in time's embrace./50/Weapon/Increases your attack power
     enemy: -
 room6:
-    description: A narrow passage with an eerie silence.
+    description: A mysterious light emanates from the ceiling. Strewn across the cold, unyielding floor, lay a multitude of skeletal remains. A massive orc rises, its baleful gaze fixed on any who dare to venture forth, ready to unleash devastation upon intruders. You see a passageway ahead.
+    north: -
+    south: -
+    west: room7
+    east: room3
+    item: -
+    enemy: Orc/80/15/10
+room7:
+    description: Within a chamber bedecked with the relics of heroes past and the banners of ancient battles, a formidable chest plate catches the flickering torchlight. Resting upon a sturdy stone pedestal, its surface is adorned with shimmering runes, emanating a protective aura that speaks of its potency and resilience.
     north: -
     south: -
     west: -
-    east: room2
+    east: room6
+    item: Rune-etched Guardian Armor/The armor emanates a radiant glow/30/Gear/Increases your defense
+    enemy: -
+room8:
+    description:You navigate through a narrow passage, the air thick with an unsettling stillness, until you emerge into a dimly illuminated chamber. From the shadows looms a formidable figure, a wyvern, its immense form casting a foreboding presence over the room.
+    north: END
+    south: room3
+    west: -
+    east: -
     item: -
-    enemy: Orc/100/20/20
+    enemy: Wyvern/150/20/5

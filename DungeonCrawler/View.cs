@@ -38,8 +38,12 @@ namespace DungeonCrawler
             " Choose the direction you want to go, North, South, East, West.\n");
             Console.WriteLine("You may occasionally face some enemies in your way."+ 
             " Pay attention to your life and manage your items carefully, flee if necessary!\n");
+            Console.WriteLine("Some enemies have high defense, and can block your " +
+            "damage, so don't forget to open your inventory and equip your gear\n");
             Console.WriteLine("Remember: you can't progress if you don't kill all enemies."+ 
-            " If you feel the enemy is too strong, look around the map for weapons, gears and potions to help you out!\n");
+            " If you feel the enemy is too strong, look around the map for weapons, " + 
+            "gears and potions to help you out!\n");
+
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("*Play in full screen for a better experience*\n\n");
 
@@ -173,6 +177,17 @@ namespace DungeonCrawler
         }
         public void GameWon()
         {
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.WriteLine("\n\n\n A staircase is all you find in front of you"+
+            "Ascending the staircase, each step feels like an " +
+            "eternity as you climb higher and higher, the weight of your journey " +
+            "pressing down upon you.\n At last, you emerge into blinding sunlight, " +
+            "the brilliance of it stinging your eyes after so long in the darkness " +
+            "below.\n Yet, despite the discomfort, a sense of fulfillment washes " +
+            "over you, knowing that you have conquered the depths and emerged " +
+            "victorious into the world above.\n\n\n");
+            
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(
             @"   ▓██   ██▓ ▒█████   █    ██     █     █░ ▒█████   ███▄    █  ▐██▌ " + "\n" +
@@ -191,7 +206,9 @@ namespace DungeonCrawler
         //Items
         public void ItemFoundMessage(Item item)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"You found an item: {item.Name} - {item.Description}");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public string ItemInformation(Item item)
@@ -224,12 +241,16 @@ namespace DungeonCrawler
         public void ItemUsed(Item item)
         {
             Console.WriteLine($"You used {item.Name}.");
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"{item.Effect} {item.Value} HP!");
+            Console.ForegroundColor = ConsoleColor.White;
         }
         public void ItemEquipped(Item item)
         {
             Console.WriteLine($"You equipped {item.Name}.");
-            Console.WriteLine($"{item.Effect} in {item.Value}!");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"{item.Name} {item.Effect} in {item.Value}!");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         //Enemy and Combat
@@ -259,6 +280,7 @@ namespace DungeonCrawler
 
         public void ShowInventory(List<Item> items)
         {
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\n>>> Inventory <<<\n");
             Console.WriteLine("----\n");
             for (int i = 0; i < items.Count; i++)
@@ -290,7 +312,7 @@ namespace DungeonCrawler
 
         public void DamageBlocked(ICharacter entity)
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"{entity.Name} blocked all damage!");
             Console.ForegroundColor = ConsoleColor.White;
         }

@@ -16,7 +16,7 @@ namespace DungeonCrawler
         }
         public void Attack(ICharacter player, int attackPower)
         {
-            player.Health -= AttackPower;
+            player.Health -= (AttackPower - player.Defense);
         }
     }
 }
