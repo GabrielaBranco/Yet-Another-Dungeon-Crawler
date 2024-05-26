@@ -5,8 +5,12 @@ namespace DungeonCrawler
     public interface IView
     {
         //Menus
-        int MainMenu();
+        void MainMenu();
         void AfterMenu();
+        void AksForInstructions();
+        void Instructions();
+        string ChoiceInput();
+        bool BoolChoiceOutput();
 
         //Start & Ending messages
         void Welcome();
@@ -18,10 +22,10 @@ namespace DungeonCrawler
         //Items
         void ItemFoundMessage(Item item);
         string ItemInformation(Item item);
-        public bool AskPickUpItem();
+        void AskPickUpItem();
         void PickedItem(Item item);
-        int InventoryMenu();
-        bool AskUseItem(Item item);
+        void InventoryMenu();
+        void AskUseItem(Item item);
         void ItemUsed(Item item);
         void ItemEquipped(Item item);
 
@@ -29,7 +33,6 @@ namespace DungeonCrawler
         void FaceEnemy();
         void CombatMenu(ICharacter enemy);
         void EnemyDefeated(ICharacter enemy);
-        int GetAction();
         void ShowInventory(List<Item> items);
         void Flee();
         void ReceiveDamage(ICharacter entity, int damage);

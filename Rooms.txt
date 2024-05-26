@@ -13,7 +13,7 @@ room2:
     west: room6
     east: -
     item: Major Life Potion/Heals all of your HP/100/Potion/You heal
-    enemy: Dragon/150/75/0
+    enemy: Dragon/150/75/10
 room3:
     description: This room is filled with ancient artifacts.
     north: -

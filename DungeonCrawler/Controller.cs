@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 
 namespace DungeonCrawler
 {
@@ -26,37 +27,47 @@ namespace DungeonCrawler
             int option;
 
             view.Welcome();
+            view.AksForInstructions();
+
+            bool response = view.BoolChoiceOutput();
+            if (response) view.Instructions();
+
             while (!gameOver)
             {
                 view.RoomDescription(currentRoom);
                 HandleRoomEvents();
 
                 if (gameOver) break;
+                view.MainMenu();
 
-                option = view.MainMenu();
-                switch (option)
+                string input = view.ChoiceInput();
+                if (int.TryParse(input, out option))
                 {
-                    case 1:
-                        MoveToRoom(currentRoom.North);
-                        break;
-                    case 2:
-                        MoveToRoom(currentRoom.South);
-                        break;
-                    case 3:
-                        MoveToRoom(currentRoom.West);
-                        break;
-                    case 4:
-                        MoveToRoom(currentRoom.East);
-                        break;
-                    case 0:
-                        view.EndMessage();
-                        gameOver = true;
-                        break;
-                    default:
-                        view.InvalidOption();
-                        break;
+                    switch (option)
+                    {
+                        case 1:
+                            MoveToRoom(currentRoom.North);
+                            break;
+                        case 2:
+                            MoveToRoom(currentRoom.South);
+                            break;
+                        case 3:
+                            MoveToRoom(currentRoom.West);
+                            break;
+                        case 4:
+                            MoveToRoom(currentRoom.East);
+                            break;
+                        case 0:
+                            view.EndMessage();
+                            gameOver = true;
+                            break;
+                        default:
+                            view.InvalidOption();
+                            break;
+                    }
+                    view.AfterMenu();
                 }
-                view.AfterMenu();
+                else view.InvalidOption();
             }
         }
 
@@ -67,8 +78,9 @@ namespace DungeonCrawler
                 string[] itemData = currentRoom.Item.Split('/');
                 Item item = new Item(itemData[0], itemData[1], int.Parse(itemData[2]), Enum.Parse<ItemType>(itemData[3]), itemData[4]);
                 view.ItemFoundMessage(item);
-
-                if (view.AskPickUpItem())
+                view.AskPickUpItem();
+                bool response = view.BoolChoiceOutput();
+                if (response)
                 {
                     player.PickUpItem(item);
                     currentRoom.Item = "-";
@@ -93,32 +105,39 @@ namespace DungeonCrawler
         {
             view.FaceEnemy();
             bool fled = false;
+            int action;
+
             while (enemy.Health > 0 && player.Health > 0 && !fled)
             {
                 view.CombatMenu(enemy);
-                int action = view.GetAction();
 
-                if (action == 1)
+                string input = view.ChoiceInput();
+                if (int.TryParse(input, out action))
                 {
-                    HandlePlayerTurn(enemy);
-                    if (enemy.Health > 0)
+                    if (action == 1)
                     {
-                        HandleEnemyTurn(enemy);
+                        HandlePlayerTurn(enemy);
+                        if (enemy.Health > 0)
+                        {
+                            HandleEnemyTurn(enemy);
+                        }
                     }
+                    else if (action == 2)
+                    {
+                        ManageInventory();
+                    }
+                    else if (action == 3)
+                    {
+                        Flee();
+                        fled = true;
+                    }
+                    else
+                    {
+                        view.InvalidOption();
+                    }
+                    view.AfterMenu();
                 }
-                else if (action == 2)
-                {
-                    ManageInventory();
-                }
-                else if (action == 3)
-                {
-                    Flee();
-                    fled = true;
-                }
-                else
-                {
-                    view.InvalidOption();
-                }
+                else view.InvalidOption();
             }
         }
 
@@ -130,6 +149,8 @@ namespace DungeonCrawler
                 view.DamageBlocked(enemy);
             }
             player.Attack(enemy, attkPower);
+
+            if (enemy.Health <= 0) return;
             view.ReceiveDamage(enemy, attkPower);
         }
 
@@ -146,6 +167,7 @@ namespace DungeonCrawler
             {
                 gameOver = true;
                 view.GameOver();
+                return;
             }
             view.ReceiveDamage(player, attkPower);
         }
@@ -158,23 +180,30 @@ namespace DungeonCrawler
         private void ManageInventory()
         {
             bool inInventory = true;
+            int inventoryOption;
             while (inInventory)
             {
                 view.ShowInventory(player.Inventory.GetItems());
-                int inventoryOption = view.InventoryMenu();
-
-                if (inventoryOption > 0 && inventoryOption <= player.Inventory.GetItems().Count)
+                view.InventoryMenu();
+                string input = view.ChoiceInput();
+                if (int.TryParse(input, out inventoryOption))
                 {
-                    Item selectedItem = player.Inventory.GetItems()[inventoryOption - 1];
-                    if (view.AskUseItem(selectedItem))
+                    if (inventoryOption > 0 && inventoryOption <= player.Inventory.GetItems().Count)
                     {
-                        UseItem(selectedItem);
-                        player.Inventory.RemoveItem(selectedItem);
+                        Item selectedItem = player.Inventory.GetItems()[inventoryOption - 1];
+                        view.AskUseItem(selectedItem);
+                        bool response = view.BoolChoiceOutput();
+                        if (response)
+                        {
+                            UseItem(selectedItem);
+                            player.Inventory.RemoveItem(selectedItem);
+                        }
                     }
-                }
-                else if (inventoryOption == 0)
-                {
-                    inInventory = false;
+                    else if (inventoryOption == 0)
+                    {
+                        inInventory = false;
+                    }
+                    else view.InvalidOption();
                 }
                 else view.InvalidOption();
             }

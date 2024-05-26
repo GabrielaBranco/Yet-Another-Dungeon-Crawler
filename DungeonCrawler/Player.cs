@@ -33,7 +33,7 @@ namespace DungeonCrawler
 
         public void Attack(ICharacter enemy, int attackPower)
         {
-            enemy.Health -= attackPower - enemy.Defense;
+            enemy.Health -= attackPower;
         }
 
         public void Heal(int value)

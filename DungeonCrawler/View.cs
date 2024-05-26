@@ -8,7 +8,7 @@ namespace DungeonCrawler
         public View(){}
 
         //Menus
-        public int MainMenu()
+        public void MainMenu()
         {
             Console.WriteLine("Which way you go?");
             Console.WriteLine("----\n");
@@ -17,19 +17,59 @@ namespace DungeonCrawler
             Console.WriteLine("3. West");
             Console.WriteLine("4. East");
             Console.WriteLine("0. Quit\n");
-            Console.Write("Your choice > ");
-            return int.Parse(Console.ReadLine());
         }
 
         public void AfterMenu()
         {
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write("\nPress any key to continue...");
             Console.ReadLine();
             Console.WriteLine("\n");
         }
 
+        public void AksForInstructions()
+        {
+            Console.WriteLine("Do you wish to see the instructions? (y/n)\n");
+        }
+
+        public void Instructions()
+        {
+            Console.WriteLine("This is a text based dungeon crawler\n");
+            
+            Console.WriteLine(
+            " ██▓    ▓█████▄▄▄█████▓  ██████     ▄▄▄▄   ▓█████   ▄████  ██▓ ███▄    █  ▐██▌ "+"\n"+
+            "▓██▒    ▓█   ▀▓  ██▒ ▓▒▒██    ▒    ▓█████▄ ▓█   ▀  ██▒ ▀█▒▓██▒ ██ ▀█   █  ▐██▌ "+"\n"+
+            "▒██░    ▒███  ▒ ▓██░ ▒░░ ▓██▄      ▒██▒ ▄██▒███   ▒██░▄▄▄░▒██▒▓██  ▀█ ██▒ ▐██▌ "+"\n"+
+            "▒██░    ▒▓█  ▄░ ▓██▓ ░   ▒   ██▒   ▒██░█▀  ▒▓█  ▄ ░▓█  ██▓░██░▓██▒  ▐▌██▒ ▓██▒ "+"\n"+
+            "░██████▒░▒████▒ ▒██▒ ░ ▒██████▒▒   ░▓█  ▀█▓░▒████▒░▒▓███▀▒░██░▒██░   ▓██░ ▒▄▄  "+"\n"+
+            "░ ▒░▓  ░░░ ▒░ ░ ▒ ░░   ▒ ▒▓▒ ▒ ░   ░▒▓███▀▒░░ ▒░ ░ ░▒   ▒ ░▓  ░ ▒░   ▒ ▒  ░▀▀▒ "+"\n"+
+            "░ ░ ▒  ░ ░ ░  ░   ░    ░ ░▒  ░ ░   ▒░▒   ░  ░ ░  ░  ░   ░  ▒ ░░ ░░   ░ ▒░ ░  ░ "+"\n"+
+            "░ ░      ░    ░      ░  ░  ░      ░    ░    ░   ░ ░   ░  ▒ ░   ░   ░ ░     ░   "+"\n"+
+            "    ░  ░   ░  ░              ░      ░         ░  ░      ░  ░           ░  ░    "+"\n"+
+            "                                       ░                                       "+"\n");
+        }
+
+        public string ChoiceInput()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Your choice > ");
+            return Console.ReadLine().Trim().ToLower();
+        }
+
+        public bool BoolChoiceOutput()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Your choice > ");
+            Console.ForegroundColor = ConsoleColor.White;
+            string response = Console.ReadLine().Trim().ToLower();
+            Console.WriteLine("\n");
+            return response == "y";
+        }
+
         public void Welcome()
         {
+            Console.ForegroundColor = ConsoleColor.White;
+
             Console.WriteLine(
             @" ▄█     █▄     ▄████████  ▄█        ▄████████  ▄██████▄    ▄▄▄▄███▄▄▄▄      ▄████████          ███      ▄██████▄ " + "\n" +
             @"███     ███   ███    ███ ███       ███    ███ ███    ███ ▄██▀▀▀███▀▀▀██▄   ███    ███      ▀█████████▄ ███    ███" + "\n" +
@@ -58,33 +98,46 @@ namespace DungeonCrawler
             @"███   ▄███ ███    ███ ███   ███   ███    ███   ███    ███ ███    ███ ███   ███      ███    ███   ███    ███   ███    ███ ███ ▄█▄ ███ ███▌    ▄   ███    ███   ███    ███" + "\n" + 
             @"████████▀  ████████▀   ▀█   █▀    ████████▀    ██████████  ▀██████▀   ▀█   █▀       ████████▀    ███    ███   ███    █▀   ▀███▀███▀  █████▄▄██   ██████████   ███    ███" + "\n" + 
             @"                                                                                                 ███    ███                          ▀                        ███    ███" + "\n\n\n");
-
-            Console.WriteLine(
-            "██▓    ▓█████▄▄▄█████▓  ██████     ▄▄▄▄   ▓█████   ▄████  ██▓ ███▄    █  ▐██▌ "+"\n"+
-            "▓██▒    ▓█   ▀▓  ██▒ ▓▒▒██    ▒    ▓█████▄ ▓█   ▀  ██▒ ▀█▒▓██▒ ██ ▀█   █  ▐██▌ "+"\n"+
-            "▒██░    ▒███  ▒ ▓██░ ▒░░ ▓██▄      ▒██▒ ▄██▒███   ▒██░▄▄▄░▒██▒▓██  ▀█ ██▒ ▐██▌ "+"\n"+
-            "▒██░    ▒▓█  ▄░ ▓██▓ ░   ▒   ██▒   ▒██░█▀  ▒▓█  ▄ ░▓█  ██▓░██░▓██▒  ▐▌██▒ ▓██▒ "+"\n"+
-            "░██████▒░▒████▒ ▒██▒ ░ ▒██████▒▒   ░▓█  ▀█▓░▒████▒░▒▓███▀▒░██░▒██░   ▓██░ ▒▄▄  "+"\n"+
-            "░ ▒░▓  ░░░ ▒░ ░ ▒ ░░   ▒ ▒▓▒ ▒ ░   ░▒▓███▀▒░░ ▒░ ░ ░▒   ▒ ░▓  ░ ▒░   ▒ ▒  ░▀▀▒ "+"\n"+
-            "░ ░ ▒  ░ ░ ░  ░   ░    ░ ░▒  ░ ░   ▒░▒   ░  ░ ░  ░  ░   ░  ▒ ░░ ░░   ░ ▒░ ░  ░ "+"\n"+
-            "░ ░      ░    ░      ░  ░  ░      ░    ░    ░   ░ ░   ░  ▒ ░   ░   ░ ░     ░   "+"\n"+
-            "    ░  ░   ░  ░              ░      ░         ░  ░      ░  ░           ░  ░    "+"\n"+
-            "                                       ░                                       "+"\n");
         }
 
         public void EndMessage()
         {
             Console.WriteLine("\n");
-            Console.WriteLine("Bye, you coward!");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(
+            @"  ▄████  ▒█████   ▒█████  ▓█████▄  ▄▄▄▄ ▓██   ██▓▓█████     " + "\n" +
+            @" ██▒ ▀█▒▒██▒  ██▒▒██▒  ██▒▒██▀ ██▌▓█████▄▒██  ██▒▓█   ▀     " + "\n" +
+            @"▒██░▄▄▄░▒██░  ██▒▒██░  ██▒░██   █▌▒██▒ ▄██▒██ ██░▒███       " + "\n" +
+            @"░▓█  ██▓▒██   ██░▒██   ██░░▓█▄   ▌▒██░█▀  ░ ▐██▓░▒▓█  ▄     " + "\n" +
+            @"░▒▓███▀▒░ ████▓▒░░ ████▓▒░░▒████▓ ░▓█  ▀█▓░ ██▒▓░░▒████▒    " + "\n" +
+            @" ░▒   ▒ ░ ▒░▒░▒░ ░ ▒░▒░▒░  ▒▒▓  ▒ ░▒▓███▀▒ ██▒▒▒ ░░ ▒░ ░    " + "\n" +
+            @"  ░   ░   ░ ▒ ▒░   ░ ▒ ▒░  ░ ▒  ▒ ▒░▒   ░▓██ ░▒░  ░ ░  ░    " + "\n" +
+            @"░ ░   ░ ░ ░ ░ ▒  ░ ░ ░ ▒   ░ ░  ░  ░    ░▒ ▒ ░░     ░       " + "\n" +
+            @"      ░     ░ ░      ░ ░     ░     ░     ░ ░        ░  ░    " + "\n" +
+            @"                           ░            ░░ ░                " + "\n" +
+            @" ▄████▄   ▒█████   █     █░ ▄▄▄       ██▀███  ▓█████▄  ▐██▌ " + "\n" +
+            @"▒██▀ ▀█  ▒██▒  ██▒▓█░ █ ░█░▒████▄    ▓██ ▒ ██▒▒██▀ ██▌ ▐██▌ " + "\n" +
+            @"▒▓█    ▄ ▒██░  ██▒▒█░ █ ░█ ▒██  ▀█▄  ▓██ ░▄█ ▒░██   █▌ ▐██▌ " + "\n" +
+            @"▒▓▓▄ ▄██▒▒██   ██░░█░ █ ░█ ░██▄▄▄▄██ ▒██▀▀█▄  ░▓█▄   ▌ ▓██▒ " + "\n" +
+            @"▒ ▓███▀ ░░ ████▓▒░░░██▒██▓  ▓█   ▓██▒░██▓ ▒██▒░▒████▓  ▒▄▄  " + "\n" +
+            @"░ ░▒ ▒  ░░ ▒░▒░▒░ ░ ▓░▒ ▒   ▒▒   ▓▒█░░ ▒▓ ░▒▓░ ▒▒▓  ▒  ░▀▀▒ " + "\n" +
+            @"  ░  ▒     ░ ▒ ▒░   ▒ ░ ░    ▒   ▒▒ ░  ░▒ ░ ▒░ ░ ▒  ▒  ░  ░ " + "\n" +
+            @"░        ░ ░ ░ ▒    ░   ░    ░   ▒     ░░   ░  ░ ░  ░     ░ " + "\n" +
+            @"░ ░          ░ ░      ░          ░  ░   ░        ░     ░    " + "\n" +
+            @"░                                              ░            ");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public void InvalidOption()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.Error.WriteLine("\n>>> Invalid option! <<<\n");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public void GameOver()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(
             @"  ▄████  ▄▄▄       ███▄ ▄███▓▓█████     ▒█████   ██▒   █▓▓█████  ██▀███     " + "\n" +
             @" ██▒ ▀█▒▒████▄    ▓██▒▀█▀ ██▒▓█   ▀    ▒██▒  ██▒▓██░   █▒▓█   ▀ ▓██ ▒ ██▒   " + "\n" +
@@ -107,10 +160,23 @@ namespace DungeonCrawler
             "            ░ ░ ▒  ░  ░ ▒ ▒░ ░ ░▒  ░ ░ ░ ░  ░  ░▒ ░ ▒░ ░  ░ " + "\n" +
             "              ░ ░   ░ ░ ░ ▒  ░  ░  ░     ░     ░░   ░     ░ " + "\n" +
             "                ░  ░    ░ ░        ░     ░  ░   ░      ░    " + "\n");
+            Console.ForegroundColor = ConsoleColor.White;
         }
         public void GameWon()
         {
-            Console.WriteLine("You won!");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(
+            @"   ▓██   ██▓ ▒█████   █    ██     █     █░ ▒█████   ███▄    █  ▐██▌ " + "\n" +
+            @"    ▒██  ██▒▒██▒  ██▒ ██  ▓██▒   ▓█░ █ ░█░▒██▒  ██▒ ██ ▀█   █  ▐██▌ " + "\n" +
+            @"     ▒██ ██░▒██░  ██▒▓██  ▒██░   ▒█░ █ ░█ ▒██░  ██▒▓██  ▀█ ██▒ ▐██▌ " + "\n" +
+            @"     ░ ▐██▓░▒██   ██░▓▓█  ░██░   ░█░ █ ░█ ▒██   ██░▓██▒  ▐▌██▒ ▓██▒ " + "\n" +
+            @"     ░ ██▒▓░░ ████▓▒░▒▒█████▓    ░░██▒██▓ ░ ████▓▒░▒██░   ▓██░ ▒▄▄  " + "\n" +
+            @"      ██▒▒▒ ░ ▒░▒░▒░ ░▒▓▒ ▒ ▒    ░ ▓░▒ ▒  ░ ▒░▒░▒░ ░ ▒░   ▒ ▒  ░▀▀▒ " + "\n" +
+            @"    ▓██ ░▒░   ░ ▒ ▒░ ░░▒░ ░ ░      ▒ ░ ░    ░ ▒ ▒░ ░ ░░   ░ ▒░ ░  ░ " + "\n" +
+            @"    ▒ ▒ ░░  ░ ░ ░ ▒   ░░░ ░ ░      ░   ░  ░ ░ ░ ▒     ░   ░ ░     ░ " + "\n" +
+            @"    ░ ░         ░ ░     ░            ░        ░ ░           ░  ░    " + "\n" +
+            @"    ░ ░                                                             ");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         //Items
@@ -124,13 +190,9 @@ namespace DungeonCrawler
             return $"{item.Name} - {item.Description} (Value: {item.Value}, Type: {item.Type})";
         }
 
-        public bool AskPickUpItem()
+        public void AskPickUpItem()
         {
             Console.WriteLine("Do you want to pick up this item? (y/n)\n");
-            Console.Write("Your choice > ");
-            string response = Console.ReadLine().Trim().ToLower();
-            Console.WriteLine("\n");
-            return response == "y";
         }
 
         public void PickedItem(Item item)
@@ -138,17 +200,16 @@ namespace DungeonCrawler
             Console.WriteLine($"You picked {item.Name}");
         }
 
-        public int InventoryMenu()
+        public void InventoryMenu()
         {
-            Console.Write("Choose an item to use > ");
-            return int.Parse(Console.ReadLine());
+            Console.Write("Choose an item to use. ");
         }
 
-        public bool AskUseItem(Item item)
+        public void AskUseItem(Item item)
         {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("\n");
             Console.WriteLine($"Do you want to use {item.Name}? (y/n)");
-            string response = Console.ReadLine().Trim().ToLower();
-            return response == "y";
         }
 
         public void ItemUsed(Item item)
@@ -169,24 +230,22 @@ namespace DungeonCrawler
         }
         public void CombatMenu(ICharacter enemy)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"{enemy.Name} has {enemy.Health} HP.\n");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("What will you do?");
             Console.WriteLine("----\n");
             Console.WriteLine("1. Attack");
             Console.WriteLine("2. Inventory");
             Console.WriteLine("3. Flee");
             Console.WriteLine("\n");
-            Console.Write("Your choice > ");
         }
 
         public void EnemyDefeated(ICharacter enemy)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine( $"You have defeated the {enemy.Name}\n");
-        }
-
-        public int GetAction()
-        {
-            return int.Parse(Console.ReadLine().Trim().ToLower());
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public void ShowInventory(List<Item> items)
@@ -205,27 +264,40 @@ namespace DungeonCrawler
         {
             Console.WriteLine("\n");
             Console.WriteLine("You fled from the battle and ran back through the way you came!");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("*You can't progress further without killing that enemy*");
+            Console.WriteLine("\n");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public void ReceiveDamage(ICharacter entity, int damage)
         {
+            Console.WriteLine("\n");
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"{entity.Name} receives {damage} damage!");
             Console.WriteLine($"{entity.Name}'s health now is: {entity.Health}\n");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public void DamageBlocked(ICharacter entity)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"{entity.Name} blocked all damage!");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         //Map and Rooms
         public void RoomDescription(Room room)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"{room.Description}\n");
+            Console.ForegroundColor = ConsoleColor.White;
         }
         public void EmptyMessage()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Error.WriteLine("\n>>> There's nothing here! <<<\n");
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }
