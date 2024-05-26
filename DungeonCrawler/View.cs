@@ -34,8 +34,16 @@ namespace DungeonCrawler
 
         public void Instructions()
         {
-            Console.WriteLine("This is a text based dungeon crawler\n");
-            
+            Console.WriteLine("You will begin with a brief description of the room you are in."+
+            " Choose the direction you want to go, North, South, East, West.\n");
+            Console.WriteLine("You may occasionally face some enemies in your way."+ 
+            " Pay attention to your life and manage your items carefully, flee if necessary!\n");
+            Console.WriteLine("Remember: you can't progress if you don't kill all enemies."+ 
+            " If you feel the enemy is too strong, look around the map for weapons, gears and potions to help you out!\n");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("*Play in full screen for a better experience*\n\n");
+
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(
             " ██▓    ▓█████▄▄▄█████▓  ██████     ▄▄▄▄   ▓█████   ▄████  ██▓ ███▄    █  ▐██▌ "+"\n"+
             "▓██▒    ▓█   ▀▓  ██▒ ▓▒▒██    ▒    ▓█████▄ ▓█   ▀  ██▒ ▀█▒▓██▒ ██ ▀█   █  ▐██▌ "+"\n"+
@@ -46,7 +54,8 @@ namespace DungeonCrawler
             "░ ░ ▒  ░ ░ ░  ░   ░    ░ ░▒  ░ ░   ▒░▒   ░  ░ ░  ░  ░   ░  ▒ ░░ ░░   ░ ▒░ ░  ░ "+"\n"+
             "░ ░      ░    ░      ░  ░  ░      ░    ░    ░   ░ ░   ░  ▒ ░   ░   ░ ░     ░   "+"\n"+
             "    ░  ░   ░  ░              ░      ░         ░  ░      ░  ░           ░  ░    "+"\n"+
-            "                                       ░                                       "+"\n");
+            "                                       ░                                       "+"\n\n");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public string ChoiceInput()
